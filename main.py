@@ -1,7 +1,7 @@
 import numpy as np
 
 ### Player A : 1
-### Player B : 2
+### Player B : -1
 
 
 class P4:
