@@ -1,19 +1,30 @@
-from board import P4
+from rules import P4
+from board import Board
 
-jeu = P4()
-jeu.start()
+game = P4()
+game.start()
 
-loop = True
+
+
 playerA = 1
 playerB = -1
 player = 1
 
-print(jeu)
-while jeu.loop:
+print(game)
+
+### Set False if you don't want an interface ###
+interface = False
+if interface:
+    board = Board()
+    board.setup() 
+
+while game.loop:
     print("Player",player,"what's your next action ?")
     act = input("Action : ")
-    if not jeu.slide(int(act),player):
-        print(jeu)
+    if not game.slide(int(act),player):
+        print(game)
     else:
         player *= -1
-        print(jeu)
+        print(game)
+        if interface:
+            board.draw(game.matrix)

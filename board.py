@@ -1,56 +1,37 @@
-import numpy as np
+import arcade
 
-### Player A : 1
-### Player B : -1
 
-class P4:
-    def __init__(self):
-        self.rows = 7
-        self.columns = 6
-        self.matrix = np.array([])
-        self.loop = True
+class Board(arcade.Window):
+    def __init__(self, width=780, height=680, title="P4"):
+        super().__init__(width, height, title)
+        arcade.set_background_color(arcade.color.AMAZON)
+        
 
-    def start(self):
-        self.matrix = np.zeros((self.columns, self.rows),int)
+    def setup(self):
+        arcade.start_render()
+        for i in range(7):
+            for j in range(6):
+                arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.BLACK_LEATHER_JACKET)
+        arcade.finish_render()
 
-    def slide(self,x_position, player):
-        y_position = self.columns -1
-        while self.matrix[y_position, x_position] != 0:
-            y_position -= 1
-            if y_position == -1:
-                return False
-        self.add((x_position, y_position), player)
-        if self.test():
-            self.win(player)
-        return True
+    def draw(self,matrix):
+        arcade.start_render()
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                if matrix[i,j] == 1:
+                    arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.RED)
+                if matrix[i,j] == -1:
+                    arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.BLUE)
+                else:
+                    arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.BLACK_LEATHER_JACKET)
+        arcade.finish_render()
 
-    def add(self, position, value):
-        self.matrix[position[1], position[0]] = value
+def main():
+    """ Main function """
+    game = Board()
+    game.setup()
+    arcade.run()
 
-    def test(self):
-        if self.x_test() or self.y_test():
-            return True
-        else:
-            return False
 
-    def transfer(self):
-        return self.matrix.T
-
-    def x_test(self):
-        for i in self.matrix:
-            for j in range(len(i)-3):
-                if np.sum(i[j:j+4]) == 4 or np.sum(i[j:j+4]) == -4:
-                    return True
-
-    def y_test(self):
-        for i in self.transfer():
-            for j in range(len(i)-3):
-                if np.sum(i[j:j+4]) == 4 or np.sum(i[j:j+4]) == -4:
-                    return True
-
-    def win(self, player):
-        self.loop = False
-        print("","#"*16,"\n","Game over","\n",player,"won","\n","#"*17,)
-
-    def __str__(self):
-        return str(self.matrix)
+if __name__ == "__main__":
+    main()
