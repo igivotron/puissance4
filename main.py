@@ -13,7 +13,7 @@ player = 1
 print(game)
 
 ### Set False if you don't want an interface ###
-interface = False
+interface = True
 if interface:
     board = Board()
     board.setup() 

@@ -1,5 +1,5 @@
 import arcade
-
+import numpy as np
 
 class Board(arcade.Window):
     def __init__(self, width=780, height=680, title="P4"):
@@ -19,15 +19,14 @@ class Board(arcade.Window):
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
                 if matrix[i,j] == 1:
-                    arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.RED)
-                if matrix[i,j] == -1:
-                    arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.BLUE)
+                    arcade.draw_circle_filled(60+110*(len(matrix[i])-j), 60+110*(len(matrix)-i),50,arcade.color.RED)
+                elif matrix[i,j] == -1:
+                    arcade.draw_circle_filled(60+110*(len(matrix[i])-j), 60+110*(len(matrix)-i),50,arcade.color.BLUE)
                 else:
-                    arcade.draw_circle_filled(60+110*i, 60+110*j,50,arcade.color.BLACK_LEATHER_JACKET)
+                    arcade.draw_circle_filled(60+110*(len(matrix[i])-j), 60+110*(len(matrix)-i),50,arcade.color.BLACK_LEATHER_JACKET)
         arcade.finish_render()
 
 def main():
-    """ Main function """
     game = Board()
     game.setup()
     arcade.run()
