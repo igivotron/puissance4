@@ -8,6 +8,7 @@ class P4:
         self.rows = 7
         self.columns = 6
         self.matrix = np.array([])
+        self.loop = True
 
     def start(self):
         self.matrix = np.zeros((self.columns, self.rows),int)
@@ -48,8 +49,8 @@ class P4:
                     return True
 
     def win(self, player):
+        self.loop = False
         print("","#"*16,"\n","Game over","\n",player,"won","\n","#"*17,)
-
 
     def __str__(self):
         return str(self.matrix)

@@ -9,7 +9,7 @@ playerB = -1
 player = 1
 
 print(jeu)
-while loop:
+while jeu.loop:
     print("Player",player,"what's your next action ?")
     act = input("Action : ")
     if not jeu.slide(int(act),player):
